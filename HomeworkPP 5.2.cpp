@@ -35,6 +35,7 @@ public:
 
     table& operator=(const table& copyFrom) {
         if (this != &copyFrom) {
+            delete this->arrint;
             this->row = copyFrom.row;
             this->col = copyFrom.col;
             this->arrint = new table_two[row];
@@ -47,7 +48,6 @@ public:
                     this->arrint[i][j] = copyFrom.arrint[i][j];
                 }
             }
-            delete[] copyFrom.arrint;
             return *this;
         }
         else {
@@ -56,6 +56,7 @@ public:
     }
 
     table(const table& copyFrom) {
+        delete this->arrint;
         this->row = copyFrom.row;
         this->col = copyFrom.col;
         this->arrint = new table_two[row];

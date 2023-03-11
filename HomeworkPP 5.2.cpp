@@ -32,6 +32,44 @@ public:
             arrint[i] = table_two(col);
         }
     }
+
+    table& operator=(const table& copyFrom) {
+        if (this != &copyFrom) {
+            this->row = copyFrom.row;
+            this->col = copyFrom.col;
+            this->arrint = new table_two[row];
+            for (int i = 0; i < row; i++)
+            {
+                this->arrint[i] = table_two(col);
+            }
+            for (int i = 0; i < row; ++i) {
+                for (int j = 0; j < col; ++j) {
+                    this->arrint[i][j] = copyFrom.arrint[i][j];
+                }
+            }
+            delete[] copyFrom.arrint;
+            return *this;
+        }
+        else {
+            return *this;
+        }
+    }
+
+    table(const table& copyFrom) {
+        this->row = copyFrom.row;
+        this->col = copyFrom.col;
+        this->arrint = new table_two[row];
+        for (int i = 0; i < row; i++)
+        {
+            this->arrint[i] = table_two(col);
+        }
+        for (int i = 0; i < row; ++i) {
+            for (int j = 0; j < col; ++j) {
+                this->arrint[i][j] = copyFrom.arrint[i][j];
+            }
+        }
+    }
+
     table_two& operator [] (int i)
     {
         return arrint[i];
@@ -50,6 +88,8 @@ public:
 int main()
 {
     auto test = table<int>(2, 3);
+    auto new_test = test;
+
     test[0][0] = 4;
     std::cout << test[0][0] << std::endl; // выводит 4
     system("Pause");

@@ -35,7 +35,13 @@ public:
 
     table& operator=(const table& copyFrom) {
         if (this != &copyFrom) {
-            delete this->arrint;
+            for (int i = 0; i < row; i++)
+            {
+                if (arrint[i].sarrint != nullptr)
+                    delete[](arrint[i].sarrint);
+            }
+            if (arrint != nullptr)
+                delete[] arrint;
             this->row = copyFrom.row;
             this->col = copyFrom.col;
             this->arrint = new table_two[row];
@@ -56,7 +62,6 @@ public:
     }
 
     table(const table& copyFrom) {
-        delete this->arrint;
         this->row = copyFrom.row;
         this->col = copyFrom.col;
         this->arrint = new table_two[row];
